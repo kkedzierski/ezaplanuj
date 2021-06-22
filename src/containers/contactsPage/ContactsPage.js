@@ -22,11 +22,11 @@ export const ContactsPage = () => {
   return (
     <div>
       <section>
-        <h2>Add Contact</h2> 
+        <h2>Dodaj kontakt</h2> 
       </section>
       <hr />
       <section>
-        <h2>Contacts</h2>
+        <h2>Kontakty</h2>
       </section>
     </div>
   );

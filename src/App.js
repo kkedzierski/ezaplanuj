@@ -24,12 +24,14 @@ function App() {
     <>
       <nav>
       <BrowserRouter>
-          <NavLink to={ROUTES.CONTACTS} activeClassName="active">
-            Contacts
-          </NavLink>
-          <NavLink to={ROUTES.APPOINTMENTS} activeClassName="active">
-            Appointments
-          </NavLink>
+          <nav id="main-navigation">
+            <NavLink to={ROUTES.CONTACTS} activeClassName="active">
+              Kontakty
+            </NavLink>
+            <NavLink to={ROUTES.APPOINTMENTS} activeClassName="active">
+              Spotkania
+            </NavLink>
+          </nav>
         </BrowserRouter>
       </nav>
       <main>
