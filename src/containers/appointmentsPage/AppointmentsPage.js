@@ -22,6 +22,15 @@ export const AppointmentsPage = () => {
       <hr />
       <section>
         <h2>Spotkania</h2>
+        <datalist data-test="appointments-list">
+          {this.props.appointments.length < 0 ? null : (
+            this.props.appointments.forEach((index, element) => {
+              <option data-test="appointment-option" key={index} value={element}/>
+            })
+          )};
+        
+
+        </datalist>
       </section>
     </div>
   );
