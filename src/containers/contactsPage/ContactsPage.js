@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 export const ContactsPage = (props) => {
   /*
@@ -44,4 +45,12 @@ export const ContactsPage = (props) => {
       </section>
     </div>
   );
+};
+// name, phone, and email
+ContactsPage.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    phone: PropTypes.string,
+    email: PropTypes.string
+  }))
 };
