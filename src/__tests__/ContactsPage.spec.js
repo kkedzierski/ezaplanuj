@@ -1,7 +1,7 @@
 import React from 'react';
-import { ContactsPage } from './containers/contactsPage/ContactsPage';e';
+import { ContactsPage } from '../containers/contactsPage/ContactsPage';
 import { shallow } from 'enzyme'
-import { findByTestAtr, checkProps}  from '../Utils/index';
+import { findByTestAtr, checkProps}  from '../../Utils/index';
 
 
 

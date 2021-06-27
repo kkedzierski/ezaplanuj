@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppointmentsPage } from './containers/appointmentsPage/AppointmentsPage';
+import { AppointmentsPage } from '../containers/appointmentsPage/AppointmentsPage';
 import { shallow } from 'enzyme'
-import { findByTestAtr, checkProps } from '../Utils/index';
+import { findByTestAtr, checkProps } from '../../Utils/index';
 
 
 describe('<AppointmentsPage />', () => {
@@ -12,7 +12,6 @@ describe('<AppointmentsPage />', () => {
     }
 
     describe('Checking propTypes', () => {
-      // name, phone, and email
           it('should not throw a warning', () => {
               const expextedProps = {
                 contactList: [{
