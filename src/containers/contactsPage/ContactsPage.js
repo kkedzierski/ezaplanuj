@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { ContactForm } from '../../components/contactForm/ContactForm';
 
 export const ContactsPage = (props) => {
   /*
@@ -10,31 +11,23 @@ export const ContactsPage = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addContact({
-      name: e.target.name.value,
-      phone: e.target.phone.value,
-      email: e.target.email.value
-    })
+    if(contacts.filter(contact => contact.name === e.target.name.value).length < 1){
+      addContact({
+        name: e.target.name.value,
+        phone: e.target.phone.value,
+        email: e.target.email.value
+      })
+      e.target.name.value = '';
+      e.target.phone.value = '';
+      e.target.email.value = '';
+    }
   };
-
-  /*
-  Using hooks, check for contact name in the 
-  contacts array variable in props
-  */
 
   return (
     <div>
       <section>
         <h2>Dodaj kontakt</h2>
-        <form onSubmit={handleSubmit} className="add-contact">
-          <label htmlFor ="name">Imię: </label>
-          <input name="name" placeholder="Wpisz imię" />
-          <label htmlFor ="phone">Telefon: </label>
-          <input name="phone" type="phone" placeholder="Wpisz numer telefonu" />
-          <label htmlFor="email">E-mail: </label>
-          <input name="email" type="email" placeholder="Wpisze e-mail" />
-          <button type="submit">Zapisz kontakt</button>
-        </form>
+        <ContactForm contacts handleSubmit={handleSubmit} />
       </section>
       <hr />
       <section>
