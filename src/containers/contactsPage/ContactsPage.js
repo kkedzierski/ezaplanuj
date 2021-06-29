@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { ContactForm } from '../../components/contactForm/ContactForm';
+import { TileList } from '../../components/tileList/TileList';
 import { validEmail, validPhone } from '../../components-utils'
 
 export const ContactsPage = (props) => {
@@ -67,15 +68,8 @@ export const ContactsPage = (props) => {
       <hr />
       <section>
         <h2>Kontakty</h2>
-        <label htmlFor="contacts-list">Aktualne kontakty:</label>
 
-        <select name="contacts-list">
-          {contacts.length < 0 ? null : (
-            contacts.map((element, index) => 
-              <option data-test="contact-option" key={index} value={element.name}>{element.name}</option>
-            )
-          )};
-        </select>
+        <TileList array={contacts}/>
 
       </section>
     </div>
