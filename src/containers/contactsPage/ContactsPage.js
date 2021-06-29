@@ -1,38 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { ContactForm } from '../../components/contactForm/ContactForm';
+import { validEmail, validPhone } from '../../components-utils'
 
 export const ContactsPage = (props) => {
-  /*
-  Define state variables for 
-  contact info and duplicate check
-  */
+
   const {contacts, addContact} = props;
 
+  const [nameErr, setNameErr] = useState(false);
+  const [phoneErr, setPhoneErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(contacts.filter(contact => contact.name === e.target.name.value).length < 1){
-      addContact({
-        name: e.target.name.value,
-        phone: e.target.phone.value,
-        email: e.target.email.value
-      })
-      e.target.name.value = '';
-      e.target.phone.value = '';
-      e.target.email.value = '';
-    }
+    
+    let name = e.target.name.value;
+    let email = e.target.email.value;
+    let phone = e.target.phone.value;
+
+      if(isValid(e)){
+        addContact({
+          name: name,
+          phone: phone,
+          email: email
+        });
+        name = '';
+        email = '';
+        phone = '';
+        clearErrors();
+      } 
   };
+
+  const clearErrors = () =>{ 
+    setNameErr(false);
+    setEmailErr(false);
+    setPhoneErr(false);
+  }
+
+  const isValid = (e) =>{
+
+    let isValid = true;
+    if(contacts.filter(contact => contact.name === e.target.name.value).length >= 1){
+      setNameErr(true);
+      isValid = false;
+    }
+    if(!validEmail.test(e.target.email.value)){
+      setEmailErr(true);
+      isValid = false;
+    }
+      
+    if(!validPhone.test(e.target.phone.value)){
+      setPhoneErr(true);
+      isValid = false;
+    }
+
+    return isValid;
+  }
 
   return (
     <div>
       <section>
         <h2>Dodaj kontakt</h2>
-        <ContactForm contacts handleSubmit={handleSubmit} />
+        <ContactForm contacts handleSubmit={handleSubmit} nameErr={nameErr} phoneErr={phoneErr} emailErr={emailErr}/>
       </section>
       <hr />
       <section>
         <h2>Kontakty</h2>
-        <label for="contacts-list">Aktualne kontakty:</label>
+        <label htmlFor="contacts-list">Aktualne kontakty:</label>
 
         <select name="contacts-list">
           {contacts.length < 0 ? null : (

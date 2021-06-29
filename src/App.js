@@ -8,7 +8,6 @@ function App() {
   const [contacts, setContacts] = useState([{}]);
   const [appointments, setAppointments] = useState([{}]);
   
-  console.log(contacts);
   const ROUTES = {
     CONTACTS: "/contacts",
     APPOINTMENTS: "/appointments",

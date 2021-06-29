@@ -95,3 +95,8 @@ select {
 .add-contact input{
  margin-top: 0.3rem;
 }
+
+.error-info{
+  font-size: 10px;
+  color: red;
+}
