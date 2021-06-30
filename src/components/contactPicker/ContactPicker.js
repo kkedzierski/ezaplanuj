@@ -1,13 +1,13 @@
 import React from "react";
 
-export const ContactPicker = ({contacts, handleChange}) => {
+export const ContactPicker = (props) => {
   return (
-    <select onChange={handleChange}>
+    <select onChange={props.handleChange}>
       <option value={""} key={-1} selected="selected">
         Nie wybrano żadnego kontaktu
       </option>
-      {contacts.length <= 0 ? null : (
-        contacts.map((element, index) => 
+      {props.contacts.length <= 0 ? null : (
+        props.contacts.map((element, index) => 
         <option key={index} value={element.name}>{element.name}</option>
       ))}
     </select>

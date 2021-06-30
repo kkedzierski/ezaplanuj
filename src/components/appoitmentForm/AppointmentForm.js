@@ -34,9 +34,10 @@ export const AppointmentForm = ({
       
       <label htmlFor="kontakt">Kontakt: </label>
       <ContactPicker 
+        value={contact}
         contacts={contacts} 
         onChange={(e) => setContact(e.target.value) }
-        name="kontakt" 
+        name="kontakt"
       />
 
       <label htmlFor="date">Data: </label>
