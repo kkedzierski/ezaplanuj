@@ -63,7 +63,7 @@ export const ContactsPage = (props) => {
     <div>
       <section>
         <h2>Dodaj kontakt</h2>
-        <ContactForm contacts handleSubmit={handleSubmit} nameErr={nameErr} phoneErr={phoneErr} emailErr={emailErr}/>
+        <ContactForm  handleSubmit={handleSubmit} nameErr={nameErr} phoneErr={phoneErr} emailErr={emailErr}/>
       </section>
       <hr />
       <section>

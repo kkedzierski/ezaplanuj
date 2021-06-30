@@ -1,15 +1,8 @@
 import React from "react";
+import { ContactPicker } from '../contactPicker/ContactPicker'
 
 export const AppointmentForm = ({
   contacts,
-  title,
-  setTitle,
-  contact,
-  setContact,
-  date,
-  setDate,
-  time,
-  setTime,
   handleSubmit
 }) => {
   const getTodayString = () => {
@@ -20,6 +13,20 @@ export const AppointmentForm = ({
   };
 
   return (
-    AppointmentForm
+    <form onSubmit={handleSubmit} clasName="add-appointment">
+      
+      <label htmlFor ="title">Tytuł: </label>
+      <input name="title" placeholder="Wpisz tytuł..." required/>
+      
+      <label htmlFor="kontakt">Kontakt: </label>
+      <ContactPicker contacts={contacts} name="kontakt" />
+      <label htmlFor="date">Data: </label>
+      <input name="date" type="date" placeholder="Wprowadź datę..." min={getTodayString()}  required/>
+
+      <label htmlFor="time">O której? </label>
+      <input name="time" type="time" placeholder="Wprowadź godzinę... " required/>
+      <button type="submit">Zapisz spotkanie</button>
+
+    </form>
   );
 };
