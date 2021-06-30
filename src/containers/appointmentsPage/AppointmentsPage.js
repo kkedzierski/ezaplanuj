@@ -3,29 +3,27 @@ import { AppointmentForm } from '../../components/appoitmentForm/AppointmentForm
 import { TileList } from '../../components/tileList/TileList';
 import PropTypes from 'prop-types';
 
-export const AppointmentsPage = (props) => {
+export const AppointmentsPage = ({appointments, addAppointment, contacts} ) => {
 
-  const {appointments, addAppointment, contacts} = props;
+
+  const [title, setTitle] = useState('');
   const [contact, setContact] = useState(
     contacts.length > 0 ? contacts[0].name : ""
   );
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    addAppointment({
-      title: e.target.title.value,
-      contact: contact,
-      date: e.target.date.value,
-      time: e.target.time.value
-    });
+    addAppointment(title, contact, date, time);
     clearForm(e);
     
   };
 
   const clearForm = (e) => {
-    e.target.title.value = "";
+    setTitle("");
     setContact("");
-    e.target.time.value = "";
-    e.target.date.value = "";
+    setTime("");
+    setDate("");
   };
 
 
@@ -33,20 +31,31 @@ export const AppointmentsPage = (props) => {
     <div>
       <section>
         <h2>Dodaj spotkanie</h2>
-        <AppointmentForm setContact={setContact} contacts={contacts} handleSubmit={handleSubmit} />
+        <AppointmentForm 
+          setContact={setContact} 
+          contacts={contacts} 
+          handleSubmit={handleSubmit}
+          title={title}
+          setTitle={setTitle}
+          contact={contact}
+          date={date}
+          setDate={setDate}
+          time={time}
+          setTime={setTime}
+        />
       </section>
       <hr />
       <section>
         <h2>Spotkania</h2>
-        <TileList array={appointments}/>
+        <TileList tiles={appointments}/>
       </section>
     </div>
   );
 };
 
-// AppointmentsPage.propTypes = {
-//   title: PropTypes.string,
-//   contact: PropTypes.string,
-//   date: PropTypes.string,
-//   time: PropTypes.string
-// }
+AppointmentsPage.propTypes = {
+  title: PropTypes.string,
+  contact: PropTypes.array,
+  date: PropTypes.string,
+  time: PropTypes.string
+}

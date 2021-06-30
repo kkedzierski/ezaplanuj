@@ -4,10 +4,11 @@ import { ContactForm } from '../../components/contactForm/ContactForm';
 import { TileList } from '../../components/tileList/TileList';
 import { validEmail, validPhone } from '../../components-utils'
 
-export const ContactsPage = (props) => {
+export const ContactsPage = ({contacts, addContact} ) => {
 
-  const {contacts, addContact} = props;
-
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [nameErr, setNameErr] = useState(false);
   const [phoneErr, setPhoneErr] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
@@ -15,20 +16,11 @@ export const ContactsPage = (props) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    let name = e.target.name.value;
-    let email = e.target.email.value;
-    let phone = e.target.phone.value;
-
       if(isValid(e)){
-        addContact({
-          name: name,
-          phone: phone,
-          email: email
-        });
-        name = '';
-        email = '';
-        phone = '';
+        addContact(name, phone, email);
+        setName('');
+        setEmail('');
+        setPhone('');
         clearErrors();
       } 
   };
@@ -63,13 +55,23 @@ export const ContactsPage = (props) => {
     <div>
       <section>
         <h2>Dodaj kontakt</h2>
-        <ContactForm  handleSubmit={handleSubmit} nameErr={nameErr} phoneErr={phoneErr} emailErr={emailErr}/>
+        <ContactForm 
+          handleSubmit={handleSubmit}
+          nameErr={nameErr} 
+          phoneErr={phoneErr} 
+          emailErr={emailErr}
+          name={name}
+          setName={setName}
+          phone={phone}
+          setPhone={setPhone}
+          email={email}
+          setEmail={setEmail}/>
       </section>
       <hr />
       <section>
         <h2>Kontakty</h2>
 
-        <TileList array={contacts}/>
+        <TileList tiles={contacts}/>
 
       </section>
     </div>

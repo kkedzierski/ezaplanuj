@@ -1,17 +1,14 @@
 import React from "react";
 
-export const Tile = (props) => {
+export const Tile = ({tile}) => {
   return (
-    <div key={props.index} className="tile-container">
+    <div className="tile-container">
 
-       <p className="tile-title">{props.element.name}</p>
-       {props.element.phone && <p className="tile"> Numer telefonu: {props.element.phone} </p> }
-       {props.element.email && <p className="tile"> Adres e-mail: {props.element.email} </p> }
-
-       {props.element.title && <p className="tile"> Tytuł: {props.element.title} </p> }
-       {props.element.contact && <p className="tile"> Kontakt: {props.element.contact} </p> }
-       {props.element.date && <p className="tile"> Kiedy: {props.element.date} </p> }
-       {props.element.time && <p className="tile"> O której: {props.element.time} </p> }
+      {Object.values(tile).map((value, index) => (
+        <p key={index} className={`${index === 0 ? "tile-title" : ""} tile`}>
+          {value}
+        </p>
+      ))}
     </div>
   );
 };
