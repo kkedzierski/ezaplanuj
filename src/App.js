@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { AppointmentsPage } from "./containers/appointmentsPage/AppointmentsPage";
 import { ContactsPage } from "./containers/contactsPage/ContactsPage";
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <nav>
-      <BrowserRouter>
+
           <nav id="main-navigation">
             <NavLink to={ROUTES.CONTACTS} activeClassName="active">
               Kontakty
@@ -33,10 +33,9 @@ function App() {
               Spotkania
             </NavLink>
           </nav>
-        </BrowserRouter>
+        
       </nav>
       <main>
-        <BrowserRouter>
           <Switch>
             <Route path={ROUTES.CONTACTS}>
               <ContactsPage contacts = {contacts} addContact={addContact} />
@@ -45,7 +44,6 @@ function App() {
               <AppointmentsPage contacts = {contacts} appointments = {appointments} addAppointment={addAppointment} />
             </Route>
           </Switch>
-        </BrowserRouter>
       </main>
     </>
   );

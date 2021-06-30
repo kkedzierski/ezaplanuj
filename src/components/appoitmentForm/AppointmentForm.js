@@ -3,7 +3,8 @@ import { ContactPicker } from '../contactPicker/ContactPicker'
 
 export const AppointmentForm = ({
   contacts,
-  handleSubmit
+  handleSubmit,
+  setContact
 }) => {
   const getTodayString = () => {
     const [month, day, year] = new Date()
@@ -19,7 +20,11 @@ export const AppointmentForm = ({
       <input name="title" placeholder="Wpisz tytuł..." required/>
       
       <label htmlFor="kontakt">Kontakt: </label>
-      <ContactPicker contacts={contacts} name="kontakt" />
+      <ContactPicker 
+        contacts={contacts} 
+        onChange={(e) => setContact(e.target.value) }
+        name="kontakt" 
+      />
       <label htmlFor="date">Data: </label>
       <input name="date" type="date" placeholder="Wprowadź datę..." min={getTodayString()}  required/>
 
