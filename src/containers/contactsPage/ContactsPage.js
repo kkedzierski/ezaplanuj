@@ -1,52 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import { ContactForm } from '../../components/contactForm/ContactForm';
+import { TileList } from '../../components/tileList/TileList';
+import { validEmail, validPhone } from '../../components-utils'
 
 export const ContactsPage = (props) => {
-  /*
-  Define state variables for 
-  contact info and duplicate check
-  */
 
+  const {contacts, addContact} = props;
+
+  const [nameErr, setNameErr] = useState(false);
+  const [phoneErr, setPhoneErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*
-    Add contact info and clear data
-    if the contact name is not a duplicate
-    */
+    
+    let name = e.target.name.value;
+    let email = e.target.email.value;
+    let phone = e.target.phone.value;
+
+      if(isValid(e)){
+        addContact({
+          name: name,
+          phone: phone,
+          email: email
+        });
+        name = '';
+        email = '';
+        phone = '';
+        clearErrors();
+      } 
   };
 
-  /*
-  Using hooks, check for contact name in the 
-  contacts array variable in props
-  */
+  const clearErrors = () =>{ 
+    setNameErr(false);
+    setEmailErr(false);
+    setPhoneErr(false);
+  }
+
+  const isValid = (e) =>{
+
+    let isValid = true;
+    if(contacts.filter(contact => contact.name === e.target.name.value).length >= 1){
+      setNameErr(true);
+      isValid = false;
+    }
+    if(!validEmail.test(e.target.email.value)){
+      setEmailErr(true);
+      isValid = false;
+    }
+      
+    if(!validPhone.test(e.target.phone.value)){
+      setPhoneErr(true);
+      isValid = false;
+    }
+
+    return isValid;
+  }
 
   return (
     <div>
       <section>
-        <h2>Dodaj kontakt</h2> 
+        <h2>Dodaj kontakt</h2>
+        <ContactForm contacts handleSubmit={handleSubmit} nameErr={nameErr} phoneErr={phoneErr} emailErr={emailErr}/>
       </section>
       <hr />
       <section>
         <h2>Kontakty</h2>
-        <datalist data-test="contacts-list">
-          {this.props.contacts.length < 0 ? null : (
-            this.props.contacts.forEach((index, element) => {
-              <option data-test="contact-option" key={index} value={element}/>
-            })
-          )};
-        </datalist>
-        <datalist data-test="contacts-list">
-          {this.props.contacts.length < 0 ? null : (
-            this.props.contacts.forEach((index, element) => {
-              <option data-test="contact-option" key={index} value={element}/>
-            })
-          )};
-        </datalist>
+
+        <TileList array={contacts}/>
+
       </section>
     </div>
   );
 };
-// name, phone, and email
+
 ContactsPage.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,

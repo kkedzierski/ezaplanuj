@@ -10,3 +10,4 @@ export const checkProps = (component, expectedProps) => {
     return propsErr;
 
 }
+
